@@ -50,22 +50,22 @@ class MyDataset(Dataset):
       self.pairs = self.pairs[0]
       print(f"{len(self.pairs)} pairs were built.", flush=True)
 
-      self.build_vocab()
+      self.build_vocab(config)
       self.vocab.max_len = max_src
 
-  def build_vocab(self, name: str = "vocab", save_vocab: bool=False, save_dir:str = "vocab.pth")->Vocab:
+  def build_vocab(self, config)->Vocab:
       total_words = [src+tgt for src,tgt, len_src, len_tgt in self.pairs]
       total_words = [item for sublist in total_words for item in sublist]
       word_counts = Counter(total_words)
-      vocab = Vocab(name=name)
+      vocab = Vocab(config)
       for word, count in word_counts.items():
         if(count > self.min_freq):
           vocab.add_by_words([word])
 
-      print(f"Vocab {name} of dataset {self.filename} was created.", flush=True)
+      print(f"Vocab {vocab.name} of dataset {self.filename} was created.", flush=True)
 
-      if save_vocab:
-        vocab.save_to_file(save_dir)
+      if config.DATA_VOCAB_save_vocab:
+        vocab.save_to_file(config.DATA_VOCAB_save_dir)
         print(f"Saved vocab {name} to {save_dir}.", flush=True)
 
       self.vocab=vocab

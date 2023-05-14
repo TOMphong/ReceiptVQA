@@ -11,7 +11,7 @@ class Scheduler(_LRScheduler):
     def __init__(self, 
                  optimizer: Optimizer,
                  dim_embed: int,
-                 warmup_steps: int,
+                 warmup_steps: int = 4000,
                  last_epoch: int=-1,
                  verbose: bool=False) -> None:
 

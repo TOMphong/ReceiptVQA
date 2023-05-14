@@ -8,9 +8,10 @@ class BaseConfig():
         
         ##VOCAB 
         self.DATA_VOCAB_name = "default"
-
+        self.DATA_VOCAB_save_vocab = False
+        self.DATA_VOCAB_save_dir = "/Data/vocab.pth"
         ##DATASET
-        self.DATA_DATASET_train = ""
+        self.DATA_DATASET_train = "/content/heroes.csv"
         #self.DATA.DATASET.vad = ""
         #self.DATA.DATASET.test = ""
         self.DATA_DATASET_truncate_src = True
